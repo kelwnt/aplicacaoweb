@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tipos de Atendimento</title>
+</head>
+<body>
+    <h2>Lista de Tipos de Atendimento</h2>
+    <button onclick="abrirModal()">Adicionar Novo</button>
+    
+    <!-- Tabela para listar os dados -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo de Atendimento</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela-corpo">
+            <!-- Os dados serão inseridos aqui via JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Modal para Adicionar/Editar -->
+    <div id="modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:white; padding:20px; border:1px solid black;">
+        <h3 id="modal-titulo">Adicionar Tipo de Atendimento</h3>
+        <input type="hidden" id="id_tipo_atendimento">
+        <label>Tipo de Atendimento:</label>
+        <input type="text" id="tipo_atendimento">
+        <label>Ativo:</label>
+        <select id="ativo">
+            <option value="1">Sim</option>
+            <option value="0">Não</option>
+        </select>
+        <button onclick="salvarDados()">Salvar</button>
+        <button onclick="fecharModal()">Cancelar</button>
+    </div>
+
+    <script>
+        /**
+         * Carrega os dados da API e insere na tabela.
+         * Faz uma requisição GET para a API.
+         * fetch('api.php')
+         */
+        function carregarDados() {
+            fetch('http://localhost/ratendimento/z_Cadastros_API_Rest/tipo_Atendimento/api.php')
+                .then(response => response.json())
+                .then(data => {
+                    let tabelaCorpo = document.getElementById('tabela-corpo');
+                    tabelaCorpo.innerHTML = "";
+                    data.forEach(item => {
+                        let linha = document.createElement('tr');
+                        linha.innerHTML = `
+                            <td>${item.id_tipo_atendimento}</td>
+                            <td>${item.tipo_atendimento}</td>
+                            <td>${item.ativo}</td>
+                            <td>
+                                <button onclick="editarItem(${item.id_tipo_atendimento}, '${item.tipo_atendimento}', ${item.ativo})">Editar</button>
+                                <button onclick="deletarItem(${item.id_tipo_atendimento})">Excluir</button>
+                            </td>
+                        `;
+                        tabelaCorpo.appendChild(linha);
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar os dados:', error));
+        }
+
+        /**
+         * Deleta um item da API pelo ID.
+         * Faz uma requisição DELETE para a API.
+         */
+        function deletarItem(id) {
+            if (confirm("Tem certeza que deseja excluir este item?")) {
+                fetch('api.php', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id_tipo_atendimento: id })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    carregarDados(); // Atualiza a tabela
+                })
+                .catch(error => console.error('Erro ao deletar:', error));
+            }
+        }
+
+        /**
+         * Abre o modal para adicionar ou editar um item.
+         */
+        function abrirModal(id = '', tipo_atendimento = '', ativo = '1') {
+            document.getElementById('id_tipo_atendimento').value = id;
+            document.getElementById('tipo_atendimento').value = tipo_atendimento;
+            document.getElementById('ativo').value = ativo;
+            document.getElementById('modal-titulo').innerText = id ? "Editar Tipo de Atendimento" : "Adicionar Tipo de Atendimento";
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        /**
+         * Fecha o modal.
+         */
+        function fecharModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        /**
+         * Preenche o modal para edição.
+         */
+        function editarItem(id, tipo_atendimento, ativo) {
+            abrirModal(id, tipo_atendimento, ativo);
+        }
+
+        /**
+         * Envia os dados para a API (POST para adicionar, PUT para editar).
+         */
+        function salvarDados() {
+            let id = document.getElementById('id_tipo_atendimento').value;
+            let tipo_atendimento = document.getElementById('tipo_atendimento').value;
+            let ativo = document.getElementById('ativo').value;
+            
+            let metodo = id ? 'PUT' : 'POST';
+            let corpo = { tipo_atendimento, ativo };
+            if (id) corpo.id_tipo_atendimento = id;
+            
+            fetch('api.php', {
+                method: metodo,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(corpo)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                fecharModal();
+                carregarDados();
+            })
+            .catch(error => console.error('Erro ao salvar:', error));
+        }
+
+        // Carrega os dados ao abrir a página
+        carregarDados();
+    </script>
+</body>
+</html>
