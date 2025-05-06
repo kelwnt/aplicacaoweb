@@ -1,2 +1,2 @@
 # Sistema de Atendimentos
-Aplicação desenvolvida para ensinar PHP em sala de aula
+Aplicação desenvolvida para aprender PHP em sala de aula
