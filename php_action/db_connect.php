@@ -5,7 +5,7 @@
 $servername = "localhost";
 $username = "root";
 $passowrd = "";
-$db_name = "ratendimento";
+$db_name = "sistema";
 
 $connect = mysqli_connect($servername, $username, $passowrd, $db_name);
 

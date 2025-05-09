@@ -45,7 +45,7 @@ endif;
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		$("#cpf").inputmask("999.999.999-99");
+		$("#cnpj").inputmask("99.999.999/9999-99");
 		$("#telefone").inputmask("(99) 9999-9999");
 	});
 </script>
@@ -65,7 +65,7 @@ endif;
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
 						<input type="text" name="nome" id="nome" class="form-control"
-							value="<?php echo $dados['nome']; ?>" minlength="8" required>
+							value="<?php echo $dados['nome']; ?>" minlength="45" required>
 					</div>
 
 					<div class="input-group input-group mb-3">
@@ -75,9 +75,9 @@ endif;
 					</div>
 
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CPF</span>
-						<input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $dados['cpf']; ?>"
-							required>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CNPJ</span>
+						<input type="text" name="cnpj" id="cnpj" class="form-control" value="<?php echo $dados['cnpj']; ?>" 
+						minlength="18" required>
 					</div>
 
 					<div class="input-group input-group mb-3">

@@ -10,7 +10,7 @@ CREATE TABLE atendente (
 	ativo varchar(1) DEFAULT NULL
 );
 
-insert into atendente values (1, 'raquel', 'd2063a446846c004df97e299fb781ea4', 'Raquel Wendt', 'A', 'A' );
+insert into atendente values (1, 'raquel', MD5('kel321'), 'Raquel Wendt', 'A', 'A' );
 select * from atendente;
 
 CREATE TABLE tipo_atendimento (
@@ -29,7 +29,7 @@ select * from tipo_atendimento;
 CREATE TABLE cliente (
     id_cliente INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
-    cnpj varchar(18) NOT NULL,
+    cnpj varchar(19) NOT NULL,
 	telefone VARCHAR (12), 
 	ativo VARCHAR(1)NOT NULL
 );
