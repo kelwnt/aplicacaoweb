@@ -63,7 +63,7 @@ session_start();
 							<tr class="table-header">
 								<th class="align-middle">Código: </th>
 								<th class="align-middle">Nome: </th>
-								<th class="align-middle">CPF: </th>
+								<th class="align-middle">CNPJ: </th>
 								<th class="align-middle">Telefone: </th>
 								<th class="align-middle">Ativo: </th>
 								<th class="align-middle">Editar: </th>
@@ -85,7 +85,7 @@ session_start();
 											<?php echo $dados['nome']; ?>
 										</td>
 										<td class="table-cell align-middle">
-											<?php echo formatar_CPF_CNPJ($dados['cpf']); ?>
+											<?php echo formatar_CNPJ($dados['cnpj']); ?>
 										</td>
 										<td class="table-cell align-middle">
 											<?php echo telephone($dados['telefone']); ?>

@@ -46,7 +46,7 @@ endif;
 
 <script type="text/javascript">
 	$(document).ready(function () {
-		$("#cpf").inputmask("999.999.999-99");
+		$("#cnpj").inputmask("99.999.999/9999-99");
 		$("#telefone").inputmask("(99) 9999-9999");
 	});
 </script>
@@ -62,12 +62,12 @@ endif;
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
 						<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome"
-							minlength="8" required>
+							minlength="45" required>
 					</div>
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CPF</span>
-						<input type="text" name="cpf" id="cpf" class="form-control" placeholder="Ex.: 000.000.000-00"
-							minlength="8" required>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CNPJ</span>
+						<input type="text" name="cnpj" id="cpf" class="form-control" placeholder="Ex.: 00.000.000/0000-00"
+							minlength="18" required>
 					</div>
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Telefone</span>
