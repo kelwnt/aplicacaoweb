@@ -88,9 +88,7 @@ session_start();
 									<td class="table-cell align-middle">
 										<?php echo $dados['nome']; ?>
 									</td>
-									<td class="table-cell align-middle">
-										<?php echo formatar_CPF($dados['cpf']); ?>
-									</td>
+									
 									<td class="table-cell align-middle">
 										<?php if ($dados['tipo_acesso'] == 'a'): ?>
 											<i class="fas fa-user-tie"></i> <!-- Ícone de administrador -->

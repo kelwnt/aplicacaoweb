@@ -80,11 +80,6 @@ endif;
 					</div>
 
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CPF</span>
-						<input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $dados['cpf']; ?>"
-							required>
-					</div>
-					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Acesso</span>
 						<select class="form-select" id="tipo_acesso" name="tipo_acesso" required>
 							<option value="" disabled>Selecione o tipo de acesso</option>
