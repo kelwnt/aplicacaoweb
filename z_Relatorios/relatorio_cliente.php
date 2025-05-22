@@ -40,7 +40,7 @@ include_once '../functions.php';
 						<span class="input-group-text" style="min-width: 10%;">Buscar por:</span>
                         <select class="form-select" id="searchBy" name="searchBy">
                                 <option value="nome">Nome</option>
-                                <option value="cpf">CPF</option>
+                                <option value="cnpj">CNPJ</option>
                             </select>                            
                             <span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Termo de Busca
 							</span>
@@ -59,7 +59,7 @@ include_once '../functions.php';
                         <tr class="table-header">
                             <th class="align-middle">id_cliente</th>
                             <th class="align-middle">Nome</th>
-                            <th class="align-middle">CPF</th>
+                            <th class="align-middle">CNPJ</th>
                             <th class="align-middle">Telefone</th>
                             <th class="align-middle">ativo</th>
                         </tr>
@@ -68,7 +68,7 @@ include_once '../functions.php';
                         <?php
                         //Abrindo conexao com o banco de dados, dentro do arquivo db_connect tem mais explicações do seu funcionamento
                         include_once '../php_action/db_connect.php';
-                        // Inclui a função de formatação do CPF/CPNJ
+                     
                         include_once '../functions.php';
 
                         $sql = "SELECT * FROM cliente";
@@ -80,8 +80,8 @@ include_once '../functions.php';
                             $term = $_GET['term'];
                             // Adiciona a cláusula WHERE na consulta SQL
                             if ($searchBy == 'cpf') {
-                                echo "<p class='text-muted'>Buscando por CPF. Não é necessário formatar.</p>";
-                                $term = str_replace(array('.', '-'), '', $term); // Remove formatação do CPF
+                                echo "<p class='text-muted'>Buscando por CNPJ. Não é necessário formatar.</p>";
+                                $term = str_replace(array('.', '-'), '', $term); // 
                             } else {
                                 $term = addslashes($term);
                             }
@@ -102,7 +102,7 @@ include_once '../functions.php';
                                         <?php echo $dados['nome']; ?>
                                     </td>
                                     <td class="table-cell align-middle">
-                                        <?php echo formatar_CPF_CNPJ($dados['cpf']); ?>
+                                        <?php echo formatar_CNPJ($dados['cnpj']); ?>
                                     </td>
                                     <td class="table-cell align-middle">
                                         <?php echo telephone($dados['telefone']); ?>
