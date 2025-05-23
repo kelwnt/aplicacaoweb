@@ -4,16 +4,22 @@ include_once '../../php_action/db_connect.php';
 
 if (isset($_POST['btn-cadastrar'])):
 
-    function formatar_CNPJ($cnpj) {
-        $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
-        if (strlen($cnpj) !== 14) return false;
-        $formatado = substr($cnpj, 0, 2) . '.' .
-                     substr($cnpj, 2, 3) . '.' .
-                     substr($cnpj, 5, 3) . '/' .
-                     substr($cnpj, 8, 4) . '-' .
-                     substr($cnpj, 12, 2);
-        return strlen($formatado) === 18 ? $formatado : false;
-    }
+function formatar_CNPJ($cnpj) {
+    
+    $cnpj = preg_replace('/[^0-9]/', '', $cnpj);
+
+    
+    if (strlen($cnpj) !== 14) return false;
+
+    // Formata: 00.000.000/0000-00
+    $formatado = substr($cnpj, 0, 2) . '.' .
+                 substr($cnpj, 2, 3) . '.' .
+                 substr($cnpj, 5, 3) . '/' .
+                 substr($cnpj, 8, 4) . '-' .
+                 substr($cnpj, 12, 2);
+
+    return strlen($formatado) === 18 ? $formatado : false;
+}
 
     function limpaTelefone($telefone) {
         return preg_replace('/[^0-9]/', '', $telefone);
