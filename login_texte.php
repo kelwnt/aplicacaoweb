@@ -1,5 +1,5 @@
 <?php
-// nova_interface_login.php
+
 require_once 'login_validation.php';
 ?>
 

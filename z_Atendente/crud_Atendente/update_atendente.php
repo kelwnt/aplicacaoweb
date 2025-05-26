@@ -1,36 +1,41 @@
 <?php
-//sessao
 session_start();
+require_once '../../php_action/db_connect.php';
 
-//conexao
-include_once '../../php_action/db_connect.php';
+if (isset($_POST['btn-editar'])) {
+    $id = mysqli_real_escape_string($connect, $_POST['id']);
+    $nome = mysqli_real_escape_string($connect, $_POST['nome']);
+    $login = mysqli_real_escape_string($connect, $_POST['login']);
+    $senha = trim(mysqli_real_escape_string($connect, $_POST['senha']));
+    $tipo_acesso = mysqli_real_escape_string($connect, $_POST['tipo_acesso']);
 
-if(isset($_POST['btn-editar'])):
+    if (!empty($senha)) {
+        $senha_hash = md5($senha);
+        $sql = "UPDATE atendente SET nome = ?, login = ?, senha = ?, tipo_acesso = ? WHERE id_atendente = ?";
+        $stmt = mysqli_prepare($connect, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "ssssi", $nome, $login, $senha_hash, $tipo_acesso, $id);
+        }
+    } else {
+        $sql = "UPDATE atendente SET nome = ?, login = ?, tipo_acesso = ? WHERE id_atendente = ?";
+        $stmt = mysqli_prepare($connect, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "sssi", $nome, $login, $tipo_acesso, $id);
+        }
+    }
 
+    if ($stmt) {
+        if (mysqli_stmt_execute($stmt)) {
+            $_SESSION['mensagem'] = "Atendente '$login' atualizado com sucesso!";
+        } else {
+            $_SESSION['mensagem'] = "Erro ao atualizar o atendente '$login'.";
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        $_SESSION['mensagem'] = "Erro ao preparar a atualização.";
+    }
 
-
-	$id = mysqli_escape_string($connect, $_POST['id']);
-	$nome = mysqli_escape_string($connect, $_POST['nome']);
-	$login = mysqli_escape_string($connect, $_POST['login']);
-	$senha = md5(mysqli_escape_string($connect, $_POST['senha']));
-	$tipo_acesso = mysqli_escape_string($connect, $_POST['tipo_acesso']);
-	$ativo = 1;
-	
-	
-	
-	
-	
-	
-	$sql = "update atendente set nome = '$nome', login = '$login', senha = '$senha', tipo_acesso = '$tipo_acesso' where id_atendente = '$id'";
-
-	if(mysqli_query($connect, $sql)):
-		$_SESSION['MENSAGEM'] = "Atendente " . $login . " alterado com sucesso!";
-		//$_SESSION['mensagem'] = "update atendente set nome = '$nome', login = '$login', senha = '$senha', tipo_acesso = '$tipo_acesso' where id_atendente = '$id'";
-		header('location: ../atendente.php');
-	else:
-		$_SESSION['MENSAGEM'] = "Erro ao alterar o Atendente: " .$login;	
-		header('location: ../atendente.php');
-	endif;
-endif;
+    header('Location: ../atendente.php');
+    exit;
+}
 ?>
-

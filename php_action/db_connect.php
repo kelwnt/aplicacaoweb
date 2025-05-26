@@ -1,6 +1,4 @@
 <?php
-//conexao com o banco de dados, abaixo assamos o usuario, a senha e o banco em qual vamos conectar. Quando chamamos o comando require_once 'php_action/db_connect.php';, 
-//estamos comecando uma conexao o banco de dados no inicio da nossa página PHP
 
 $servername = "localhost";
 $username = "root";

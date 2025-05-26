@@ -1,28 +1,27 @@
 <?php
-//sessao
 session_start();
+require_once '../../php_action/db_connect.php';
 
-//conexao
-include_once '../../php_action/db_connect.php';
+if (isset($_POST['btn-reativar'])) {
+    $id = mysqli_real_escape_string($connect, $_POST['id']);
 
-if(isset($_POST['btn-reativar'])):
+    // Atualiza o campo ativo para 'A'
+    $sql = "UPDATE atendente SET ativo = 'A' WHERE id_atendente = ?";
+    $stmt = mysqli_prepare($connect, $sql);
 
-	$id = mysqli_escape_string($connect, $_POST['id']);
-	
-	
-	
-	//$sql = "delete from atendente where id_atendente = '$id'";
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        if (mysqli_stmt_execute($stmt)) {
+            $_SESSION['mensagem'] = "Atendente ID $id reativado com sucesso!";
+        } else {
+            $_SESSION['mensagem'] = "Erro ao reativar atendente!";
+        }
+        mysqli_stmt_close($stmt);
+    } else {
+        $_SESSION['mensagem'] = "Erro!";
+    }
 
-	$ativo = 1;
-	$sql = "update atendente set ativo = '$ativo' where id_atendente = '$id'";
-
-	if(mysqli_query($connect, $sql)):
-		$_SESSION['MENSAGEM'] = "Atendente " .$sql. " reativaaaaa com sucesso!";
-		header('location: ../atendente.php');
-	else:
-		$_SESSION['MENSAGEM'] = "Erro ao Reativar Atendente!";	
-		header('location: ../atendente.php');
-	endif;
-endif;
+    header('Location: ../atendente.php');
+    exit;
+}
 ?>
-
