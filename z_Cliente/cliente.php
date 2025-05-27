@@ -11,7 +11,6 @@ include_once '../php_action/db_connect.php';
 
 include_once 'selects_Cliente.php';
 
-// Inclui a função de formatação do CPF/CPNJ
 include_once '../functions.php';
 
 //sessao
@@ -24,7 +23,7 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -58,15 +57,15 @@ session_start();
 					<h3 class="text-center">Clientes</h3>
 				</div>
 				<div class="rounded border border-secondary p-3">
-					<table class="table table-striped text-center">
-						<thead>
-							<tr class="table-header">
+					<table class="table table-bordered align-middle text-center">
+						<thead class="table-dark">
+							<tr>
 								<th class="align-middle">Código: </th>
 								<th class="align-middle">Nome: </th>
 								<th class="align-middle">CNPJ: </th>
 								<th class="align-middle">Telefone: </th>
 								<th class="align-middle">Ativo: </th>
-								<th class="align-middle">Editar: </th>
+								<th class="align-middle">Alterar: </th>
 								<th class="align-middle">Excluir: </th>
 							</tr>
 						</thead>
@@ -130,7 +129,7 @@ session_start();
 							else:
 								?>
 								<tr>
-									<td colspan="8" class="text-center">Nenhum atendente encontrado.</td>
+									<td colspan="8" class="text-center">Nenhum cliente encontrado.</td>
 								</tr>
 								<?php
 							endif;

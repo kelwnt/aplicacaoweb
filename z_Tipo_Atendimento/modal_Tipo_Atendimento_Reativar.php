@@ -12,7 +12,7 @@
                 <div class="modal-footer">
                     <form action="crud_Tipo_Atendimento/reativar_tipo_atendimento.php" method="post">
                         <input type="hidden" id="reativaId" name="id" value="">
-                        <button type="submit" name="btn-reativar" class="btn btn-danger">Sim, quero reativar</button>
+                        <button type="submit" name="btn-reativar" class="btn btn-info">Sim, quero reativar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </form>
                 </div>

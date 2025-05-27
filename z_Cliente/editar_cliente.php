@@ -65,7 +65,7 @@ endif;
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
 						<input type="text" name="nome" id="nome" class="form-control"
-							value="<?php echo $dados['nome']; ?>" minlength="45" required>
+							value="<?php echo $dados['nome']; ?>"  required>
 					</div>
 
 					<div class="input-group input-group mb-3">
@@ -81,16 +81,14 @@ endif;
 					</div>
 
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Acesso</span>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Ativo</span>
 						<input type="text" name="ativo" id="ativo" class="form-control"
 							value="<?php echo $dados['ativo']; ?>" maxlength="1" required>
 					</div>
 
-					<button type="submit" name="btn-editar" class="btn btn-secondary mt-3 float-end"><i
+					<button type="submit" name="btn-editar" class="btn btn-info mt-3 float-end"><i
 							class="fas fa-sync-alt"></i> Atualizar</button>
-					<!--<button type="submit" name="btn-editar" class="btn"> Atualizar </button>-->
-					<a href="cliente.php" class="btn btn-success mt-3 float-end me-2"><i class="fas fa-list"></i>
-						Lista de Clientes</a>
+					<a href="cliente.php" class="btn btn-success mt-3 float-end me-2"></i>Voltar</a>
 			</form>
 
 

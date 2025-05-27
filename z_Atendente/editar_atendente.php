@@ -90,12 +90,10 @@ endif;
 					</div>
 				</div>
 
-				<button type="submit" name="btn-editar" class="btn btn-secondary mt-3 float-end"><i
+				<button type="submit" name="btn-editar" class="btn btn-info mt-3 float-end"><i
 						class="fas fa-sync-alt"></i> Atualizar</button>
 				<!--<button type="submit" name="btn-editar" class="btn"> Atualizar </button>-->
-				<a href="atendente.php" class="btn btn-success mt-3 float-end me-2"><i class="fas fa-list"></i>
-					Lista de
-					atendentes</a>
+				<a href="atendente.php" class="btn btn-success mt-3 float-end me-2"></i>Voltar</a>
 
 			</form>
 

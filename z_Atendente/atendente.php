@@ -39,7 +39,7 @@ session_start();
                         <th>Login</th>
                         <th>Nome</th>
                         <th>Tipo de Acesso</th>
-                        <th>Status</th>
+                        <th>Ativo</th>
                         <th>Alterar</th>
                         <th>Deletar</th>
                     </tr>
