@@ -70,11 +70,13 @@ session_start();
                                 ?>
                             </td>
                             <td>
-                                <a href="editar.php?id=<?= $dados['id_atendente']; ?>" class="btn btn-warning btn-sm">
-                                    <i class="bi bi-pencil"></i> Editar
-                                </a>
+                                <a href="editar_atendente.php?id_atendente=<?php echo $dados['id_atendente']; ?>"
+								    class="btn btn-warning" role="button">
+								    <i class="bi bi-pencil"></i> Editar
+								</a>
                             </td>
-                            <td>
+
+                            <td class="table-cell align-middle">
                                 <?php if (strtoupper($dados['ativo']) === 'A'): ?>
                                     <form method="POST" action="crud_Atendente/inativar_atendente.php" style="display:inline;">
                                         <input type="hidden" name="id" value="<?= $dados['id_atendente']; ?>">
@@ -85,7 +87,7 @@ session_start();
                                 <?php else: ?>
                                     <form method="POST" action="crud_Atendente/reativar_atendente.php" style="display:inline;">
                                         <input type="hidden" name="id" value="<?= $dados['id_atendente']; ?>">
-                                        <button type="submit" name="btn-reativar" class="btn btn-success btn-sm">
+                                        <button type="submit" name="btn-reativar" class="btn btn-info btn-sm">
                                             <i class="bi bi-arrow-clockwise"></i> Reativar
                                         </button>
                                     </form>

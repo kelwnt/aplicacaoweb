@@ -3,17 +3,11 @@
 // Conexão com o banco de dados
 include_once '../php_action/db_connect.php';
 
-// Inclui o cabeçalho
-//include_once 'includes/header.php';
-
-// Inclui as mensagens
-//include_once 'includes/mensagens.php';
-
 include_once 'selects_Cliente.php';
 
 include_once '../functions.php';
 
-//sessao
+
 session_start();
 ?>
 
@@ -90,7 +84,7 @@ session_start();
 											<?php echo telephone($dados['telefone']); ?>
 										</td>
 										<td class="table-cell align-middle">
-										<?php if ($dados['ativo'] == '1'): ?>
+										<?php if ($dados['ativo'] == 'A'): ?>
 											<i class="fas fa-check-circle text-success"></i>
 											<!-- Ícone de checkmark verde para status ativo -->
 										<?php else: ?>
@@ -109,14 +103,14 @@ session_start();
 											<!-- excluir cliente -->
 
 										<td class="table-cell align-middle">
-										<?php if ($dados['ativo'] == 1): ?>
+										<?php if ($dados['ativo'] == 'A'): ?>
 											<button onclick="setDeleteId(<?php echo $dados['id_cliente']; ?>)"
 												class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete">
 												<i class="bi bi-trash"></i> Deletar
 											</button>
-										<?php elseif ($dados['ativo'] == 2): ?>
+										<?php elseif ($dados['ativo'] == 'D'): ?>
 											<button onclick="setReativaId(<?php echo $dados['id_cliente']; ?>)"
-												class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_reativar">
+												class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal_reativar">
 												<i class="bi bi-check"></i> Reativar
 											</button>
 										<?php endif; ?>

@@ -7,8 +7,8 @@ include_once '../../php_action/db_connect.php';
 
 if (isset($_POST['btn-editar'])):
 
-    $id = mysqli_escape_string($connect, $_POST['id']);
-    $nome = mysqli_escape_string($connect, $_POST['nome']);
+    $id = mysqli_escape_string($connect, $_POST['id_cliente']);
+    $nome = mysqli_escape_string($connect, $_POST['cliente']);
     $telefone = mysqli_escape_string($connect, $_POST['telefone']);
     $telefone = limpa_CNPJ_telefone($telefone);
 	$ativo = 'A';

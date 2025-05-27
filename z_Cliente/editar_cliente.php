@@ -20,7 +20,7 @@ endif;
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -60,11 +60,11 @@ endif;
 
 			<form action="crud_Cliente/update_cliente.php" method="POST">
 				<div class="rounded border border-secondary p-3">
-					<input type="hidden" name="id" id="id" value="<?php echo $dados['id_cliente']; ?>">
+					<input type="hidden" name="id_cliente" id="id_cliente" value="<?php echo $dados['id_cliente']; ?>">
 
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
-						<input type="text" name="nome" id="nome" class="form-control"
+						<input type="text" name="cliente" id="cliente" class="form-control"
 							value="<?php echo $dados['nome']; ?>"  required>
 					</div>
 
@@ -82,9 +82,16 @@ endif;
 
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Ativo</span>
-						<input type="text" name="ativo" id="ativo" class="form-control"
-							value="<?php echo $dados['ativo']; ?>" maxlength="1" required>
+						<select class="form-select" id="ativo" name="ativo" required>
+							<option value="" disabled>Selecione o tipo de acesso</option>
+							<option value="A" <?php echo ($dados['ativo'] == 'A') ? 'selected' : ''; ?>>
+								Ativo</option>
+							<option value="D" <?php echo ($dados['ativo'] == 'D') ? 'selected' : ''; ?>>Inativo
+							</option>
+						</select>
 					</div>
+
+</div>
 
 					<button type="submit" name="btn-editar" class="btn btn-info mt-3 float-end"><i
 							class="fas fa-sync-alt"></i> Atualizar</button>

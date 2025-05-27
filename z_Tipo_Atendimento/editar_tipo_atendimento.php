@@ -20,7 +20,7 @@ endif;
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -48,7 +48,7 @@ endif;
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
 						<input type="text" name="tipo_atendimento" id="tipo_atendimento" class="form-control"
-							value="<?php echo $dados['tipo_atendimento']; ?>" minlength="8" required>
+							value="<?php echo $dados['tipo_atendimento']; ?>"  required>
 					</div>
 
 					<!--<div class="input-group input-group mb-3">
@@ -57,7 +57,7 @@ endif;
 							value="<?php echo $dados['ativo']; ?>" maxlength="1" required>
 					</div>-->
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Acesso</span>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Ativo</span>
 						<select class="form-select" id="ativo" name="ativo" required>
 							<option value="" disabled>Selecione o tipo de acesso</option>
 							<option value="A" <?php echo ($dados['ativo'] == 'A') ? 'selected' : ''; ?>>

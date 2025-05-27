@@ -26,7 +26,7 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -60,7 +60,7 @@ session_start();
 							<th class="align-middle">Código: </th>
 							<th class="align-middle">Nome do tipo: </th>
 							<th class="align-middle">Ativo: </th>
-							<th class="align-middle">Editar: </th>
+							<th class="align-middle">Alterar: </th>
 							<th class="align-middle">Excluir: </th>
 						</tr>
 					</thead>
@@ -106,7 +106,7 @@ session_start();
 											</button>
 										<?php elseif ($dados['ativo'] == 'D'): ?>
 											<button onclick="setReativaId(<?php echo $dados['id_tipo_atendimento']; ?>)"
-												class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_reativar">
+												class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal_reativar">
 												<i class="bi bi-check"></i> Reativar
 											</button>
 										<?php endif; ?>

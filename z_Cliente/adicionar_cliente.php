@@ -61,8 +61,7 @@ endif;
 				<div class="rounded border border-secondary p-3">
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Nome</span>
-						<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome"
-							minlength="20" required>
+						<input type="text" name="nome" id="nome" class="form-control" placeholder="Digite o nome" required>
 					</div>
 					<div class="input-group input-group mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">CNPJ</span>
