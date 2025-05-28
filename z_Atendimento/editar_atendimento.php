@@ -4,15 +4,6 @@ session_start();
 include_once '../php_action/db_connect.php';
 //header
 
-
-
-
-//echo $_SESSION['id_atendente'];
-//echo $_SESSION['LOGADO'];
-//echo $_SESSION['id_atendente'];
-//echo $_SESSION['nome'];
-//echo $_SESSION['login'];
-
 if (!isset ($_SESSION['LOGADO'])):
 	header('location: logout.php');
 endif;
@@ -55,7 +46,7 @@ endif;
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -152,14 +143,14 @@ endif;
 					</div>
 
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Descrição do Adtendimento
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Descrição do Atendimento
 							</span>
 						<input type="text" name="descricao" id="descricao" class="form-control" 
 							value=<?php echo $dados['descricao']; ?> >
 					</div>
 
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Adtendimento Aberto
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Atendimento Aberto
 							</span>
 						<input type="text" name="ativo" id="ativo" class="form-control" 
 							value=<?php echo $dados['ativo']; ?> >
@@ -168,9 +159,8 @@ endif;
 				</div>
 
 				<button type="submit" name="btn-editar" onclick="valida()"
-					class="btn btn-secondary mt-3 float-end"><i class="bi bi-plus"></i>Atualizar</button>
-				<a href="atendimento.php" class="btn btn-success mt-3 float-end me-2"><i class="fas fa-list"></i>
-					Lista de atendentes</a>
+					class="btn btn-info mt-3 float-end"><i class="bi bi-plus"></i>Atualizar</button>
+				<a href="atendimento.php" class="btn btn-success mt-3 float-end me-2"></i>Voltar</a>
 
 			</form>
 

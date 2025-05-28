@@ -7,7 +7,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Tem certeza que deseja excluir este Atendimento?</p>
+                    <p>Tem certeza que quer excluir este Atendimento?</p>
                 </div>
                 <div class="modal-footer">
                     <form action="crud_Atendimento/fechar_atendimento.php" method="post">

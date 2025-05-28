@@ -33,7 +33,7 @@ session_start();
 
         <div class="table-responsive">
             <table class="table table-bordered align-middle text-center">
-                <thead class="table-dark">
+                <thead class="table-primary">
                     <tr>
                         <th>Código</th>
                         <th>Login</th>

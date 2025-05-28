@@ -12,7 +12,7 @@
                 <div class="modal-footer">
                     <form action="crud_Atendimento/concluir_atendimento.php" method="post">
                         <input type="hidden" id="concluirId" name="id" value="">
-                        <button type="submit" name="btn-concluir" class="btn btn-success">Sim, quero concluir o atendimento</button>
+                        <button type="submit" name="btn-concluir" class="btn btn-info">Sim, quero concluir o atendimento</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </form>
                 </div>

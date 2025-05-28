@@ -3,15 +3,8 @@
 // Conexão com o banco de dados
 include_once '../php_action/db_connect.php';
 
-// Inclui o cabeçalho
-//include_once 'includes/header.php';
-
-// Inclui as mensagens
-//include_once 'includes/mensagens.php';
-
 include_once 'select_atendimento/selects_Atendimento_encerrado.php';
 
-// Inclui a função de formatação do CPF/CPNJ
 include_once '../functions.php';
 
 //sessao
@@ -24,7 +17,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RAtendimento</title>
+    <title>Sistema de Atendimento</title>
     <!-- CSS do Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-..." crossorigin="anonymous">
@@ -49,11 +42,11 @@ session_start();
             <div class="rounded border border-secondary p-3">
                 <table class="table table-striped text-center">
                     <thead>
-                        <tr class="table-header">
+                        <tr class="table-primary">
                             <th class="align-middle">Código: </th>
-                            <th class="align-middle">Data Inicio: </th>
+                            <th class="align-middle">Data Início: </th>
                             <th class="align-middle">Data Fim: </th>
-                            <th class="align-middle">Tipo Atendimento</th>
+                            <th class="align-middle">Tipo Atendimento:</th>
                             <th class="align-middle">Nome Cliente: </th>
                             <th class="align-middle">Reativar Atendimento: </th>
                             <th class="align-middle">Detalhes: </th>
@@ -104,10 +97,10 @@ session_start();
                                             <table class="table text-center">
                                                 <thead>
                                                     <tr class="table-header">
-                                                        <th class="align-middle">Descrição Tipo Atendimento</th>
-                                                        <th class="align-middle">Nome Atendente</th>
-                                                        <th class="align-middle">Descrição</th>
-                                                        <th class="align-middle">Ativo</th>
+                                                        <th class="align-middle">Descrição Tipo Atendimento:</th>
+                                                        <th class="align-middle">Nome Atendente:</th>
+                                                        <th class="align-middle">Descrição:</th>
+                                                        <th class="align-middle">Ativo:</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -125,7 +118,7 @@ session_start();
 															<?php
 															$status = $dados['ativo'];
 															if ($status == 'A') {
-																echo '<i class="bi bi-check-circle-fill text-success"></i>'; // Ícone de ativo
+																	echo '<i class="bi bi-check-circle-fill text-success"></i>'; // Ícone de ativo
 															} elseif ($status == 'D') {
 																echo '<i class="bi bi-x-circle-fill text-danger"></i>'; // Ícone de deletado
 															} elseif ($status == 'C') {

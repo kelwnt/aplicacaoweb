@@ -3,15 +3,8 @@
 // Conexão com o banco de dados
 include_once '../php_action/db_connect.php';
 
-// Inclui o cabeçalho
-//include_once 'includes/header.php';
-
-// Inclui as mensagens
-//include_once 'includes/mensagens.php';
-
 include_once 'selects_Tipo_Atendimento.php';
 
-// Inclui a função de formatação do CPF/CPNJ
 include_once '../functions.php';
 
 //sessao
@@ -56,7 +49,7 @@ session_start();
 			<div class="rounded border border-secondary p-3">
 				<table class="table table-striped text-center">
 					<thead>
-						<tr class="table-header">
+						<tr class="table-primary">
 							<th class="align-middle">Código: </th>
 							<th class="align-middle">Nome do tipo: </th>
 							<th class="align-middle">Ativo: </th>

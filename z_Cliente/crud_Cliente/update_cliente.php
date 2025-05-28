@@ -7,11 +7,15 @@ include_once '../../php_action/db_connect.php';
 
 if (isset($_POST['btn-editar'])):
 
+	 // Remove caracteres não numéricos (útil para CNPJ e telefone)
+function limpa_CNPJ_telefone($valor) {
+    return preg_replace('/[^0-9]/', '', $valor);
+}
     $id = mysqli_escape_string($connect, $_POST['id_cliente']);
     $nome = mysqli_escape_string($connect, $_POST['cliente']);
     $telefone = mysqli_escape_string($connect, $_POST['telefone']);
     $telefone = limpa_CNPJ_telefone($telefone);
-	$ativo = 'A';
+	$ativo = mysqli_escape_string($connect, $_POST['ativo']);
 
 	$sql = "UPDATE cliente SET nome = '$nome', telefone = '$telefone', ativo = '$ativo' WHERE id_cliente = '$id'";
 

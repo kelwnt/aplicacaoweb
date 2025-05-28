@@ -20,7 +20,6 @@ include_once '../php_action/db_connect.php';
             $resultado_cliente = mysqli_query($connect, $sql_cliente);
 
 
-// Inclui a função de formatação do CPF/CPNJ
 include_once '../functions.php';
 
 //sessao
@@ -32,14 +31,12 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
 	<!-- Ícones do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-	<!-- Adicione aqui seus outros estilos CSS -->
 
 	<script>
 		// Função para armazenar o ID do atendente quando o botão de deletar é clicado
@@ -63,7 +60,7 @@ session_start();
 			<div class="rounded border border-secondary p-3">
 				<table class="table table-striped text-center">
 					<thead>
-						<tr class="table-header">
+						<tr class="table-primary">
 							<th class="align-middle">Código: </th>
 							<th class="align-middle">Data Inicio: </th>
 							<th class="align-middle">Data Fim: </th>

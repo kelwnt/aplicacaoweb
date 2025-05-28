@@ -3,15 +3,8 @@
 // Conexão com o banco de dados
 include_once '../php_action/db_connect.php';
 
-// Inclui o cabeçalho
-//include_once 'includes/header.php';
-
-// Inclui as mensagens
-//include_once 'includes/mensagens.php';
-
 include_once 'select_atendimento/selects_Atendimento.php';
 
-// Inclui a função de formatação do CPF/CPNJ
 include_once '../functions.php';
 
 //sessao
@@ -23,7 +16,7 @@ session_start();
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -54,7 +47,7 @@ session_start();
 			<div class="rounded border border-secondary p-3">
 				<table class="table table-striped text-center">
 					<thead>
-						<tr class="table-header">
+						<tr class="table-primary">
 							<th class="align-middle">Código: </th>
 							<th class="align-middle">Data Inicio: </th>
 							<th class="align-middle">Data Fim: </th>
@@ -117,7 +110,7 @@ session_start();
 									</td>
 
 									<td class="table-cell align-middle">
-										<button class="btn btn-success" data-bs-toggle="collapse"
+										<button class="btn btn-info" data-bs-toggle="collapse"
 											data-bs-target="#details-<?php echo $dados['id_atendimento']; ?>">
 											<i class="bi bi-chevron-down"></i>
 										</button>

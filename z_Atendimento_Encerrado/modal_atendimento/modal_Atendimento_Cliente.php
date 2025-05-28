@@ -12,7 +12,7 @@
                         <tr class="table-header">
                             <th class="align-middle">Código: </th>
                             <th class="align-middle">Nome: </th>
-                            <th class="align-middle">CPF: </th>
+                            <th class="align-middle">CNPJ: </th>
                             <th class="align-middle">Selecionar: </th>
 
                         </tr>
@@ -38,8 +38,8 @@
                                     </td>
                                     <td class="table-cell align-middle">
                                         <?php
-                                        $cpf = $dados_cliente['cpf'];
-                                        echo substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+                                        $cnpj = $dados_cliente['cnpj'];
+                                        echo substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 3) . '.' . substr($cnpj, 5, 3) . '/' . substr($cnpj, 8, 4) . '-' . substr($cnpj, 12, 2);
                                         ?>
                                     </td>
                                     <td class="table-cell align-middle">
@@ -54,7 +54,7 @@
                                 </tr>
 
                             <?php endwhile;
-                        else: ?>
+                        else; ?>
 
                             <?php
                         endif;

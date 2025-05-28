@@ -9,8 +9,7 @@ if(isset($_POST['btn-deletar'])):
 
 	$id = mysqli_escape_string($connect, $_POST['id']);
 	
-	$ativo = 2;
-	$sql = "update cliente set ativo = '$ativo' where id_cliente = '$id'";
+	$sql = "update cliente set ativo = 'D' where id_cliente = '$id'";
 
 	if(mysqli_query($connect, $sql)):
 		$_SESSION['MENSAGEM'] = "Cliente de ID ".$id. " inativado com sucesso!";

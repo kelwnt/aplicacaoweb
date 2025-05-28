@@ -12,7 +12,7 @@
                 <div class="modal-footer">
                     <form action="crud_Cliente/inativar_Cliente.php" method="post">
                         <input type="hidden" id="deleteId" name="id" value="">
-                        <button type="submit" name="btn-deletar" class="btn btn-danger">Sim, quero deletar</button>
+                        <button type="submit" name="btn-deletar" class="btn btn-info">Sim, quero deletar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </form>
                 </div>

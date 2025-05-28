@@ -27,19 +27,10 @@ if(isset($_POST['btn-cadastrar'])):
 $sql = "insert into atendimento ( dt_fim, dt_inicio, id_tipo_atendimento, id_atendente, id_cliente, descricao, ativo) 
 							VALUES ( '$dt_fim','$dt_inicio', '$id_tipo_atendimento', '$id_atendente', '$id_cliente', '$descricao', '$ativo')";
 	
-	
-
-//$sql = "insert into atendimento ( dt_fim, dt_inicio, id_tipo_atendimento, id_atendente, id_cliente, descricao, ativo) 
-//							VALUES ( '$dt_fim','$dt_inicio', '$id_tipo_atendimento', '$id_atendente', '$id_cliente', '$$descricao', '$ativo')";
-							
-//$sql = "insert into atendente ( login, senha, nome, cpf, tipo_acesso, ativo) VALUES ('$login', '$senha', '$nome','$cpf', '$tipo_acesso', '$ativo')";
-
-
 	if(mysqli_query($connect, $sql)):
 		$_SESSION['MENSAGEM'] = "Atendimento Cadastrado com sucesso!";
 		header('location: ../atendimento.php');
 	else:
-		/*$_SESSION['mensagem'] = "$dt_inicio, $dt_fim, $id_tipo_atendimento, $id_tipo_atendimento, $id_atendente, $id_cliente, $descricao, $ativo";*/
 		$_SESSION['mensagem'] = "Falha ao adicionar Atendimento";
 		echo $_SESSION['MENSAGEM'];
 		header('location: ../atendimento.php');

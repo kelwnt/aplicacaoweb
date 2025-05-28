@@ -17,7 +17,7 @@ include_once '../functions.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RAtendimento</title>
+    <title>Sistema de Atendimento</title>
     <!-- CSS do Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-..." crossorigin="anonymous">
@@ -79,9 +79,9 @@ include_once '../functions.php';
                             $searchBy = $_GET['searchBy'];
                             $term = $_GET['term'];
                             // Adiciona a cláusula WHERE na consulta SQL
-                            if ($searchBy == 'cpf') {
+                            if ($searchBy == 'cnpj') {
                                 echo "<p class='text-muted'>Buscando por CNPJ. Não é necessário formatar.</p>";
-                                $term = str_replace(array('.', '-'), '', $term); // 
+                                $term = str_replace(array('.', '/', '-'), '', $term); // 
                             } else {
                                 $term = addslashes($term);
                             }

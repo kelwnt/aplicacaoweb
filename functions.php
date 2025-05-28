@@ -1,4 +1,5 @@
 <?php
+
 // Função para formatar CNPJ no padrão 00.000.000/0000-00
 function formatar_CNPJ($cnpj) {
     $cnpj = preg_replace("/[^0-9]/", "", $cnpj);

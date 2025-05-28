@@ -21,7 +21,7 @@ endif;
 <head>
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>RAtendimento</title>
+	<title>Sistema de Atendimento</title>
 	<!-- CSS do Bootstrap 5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-..." crossorigin="anonymous">
@@ -110,7 +110,7 @@ endif;
 
 					
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Descrição do Adtendimento
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 5%;">Descrição do Atendimento
 							</span>
 						<input type="text" name="descricao" id="descricao" class="form-control" 
 							value="" >
@@ -118,9 +118,8 @@ endif;
 				</div>
 
 				<button type="submit" name="btn-cadastrar" onclick="valida()"
-					class="btn btn-secondary mt-3 float-end"><i class="bi bi-plus"></i> Cadastrar</button>
-				<a href="atendimento.php" class="btn btn-success mt-3 float-end me-2"><i class="fas fa-list"></i>
-					Lista de atendentes</a>
+					class="btn btn-info mt-3 float-end"><i class="bi bi-plus"></i> Cadastrar</button>
+				<a href="atendimento.php" class="btn btn-success mt-3 float-end me-2"></i>Voltar</a>
 
 			</form>
 

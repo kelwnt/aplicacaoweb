@@ -52,7 +52,7 @@ session_start();
 				</div>
 				<div class="rounded border border-secondary p-3">
 					<table class="table table-bordered align-middle text-center">
-						<thead class="table-dark">
+						<thead class="table-primary">
 							<tr>
 								<th class="align-middle">Código: </th>
 								<th class="align-middle">Nome: </th>

@@ -18,9 +18,6 @@ if(isset($_POST['btn-editar'])):
 	$id_cliente = mysqli_escape_string($connect, $_POST['id_cliente']);
 	$descricao = mysqli_escape_string($connect, $_POST['descricao']);
 	$ativo = mysqli_escape_string($connect, $_POST['ativo']);
-
-	
-	//echo "update atendente set nome = '$nome', login = '$login', senha = '$senha', cpf = '$cpf', tipo_acesso = '$tipo_acesso' where id_atendente = '$id'";
 	
 	echo $id_tipo_atendimento; 
 	
@@ -30,7 +27,6 @@ if(isset($_POST['btn-editar'])):
 
 	if(mysqli_query($connect, $sql)):
 		$_SESSION['mensagem'] = "Atendimento " .$id. " atualizado com sucesso com Sucesso";
-		//$_SESSION['mensagem'] = "update atendente set nome = '$nome', login = '$login', senha = '$senha', cpf = '$cpf', tipo_acesso = '$tipo_acesso' where id_atendente = '$id'";
 		header('location: ../atendimento.php');
 	else:
 		$_SESSION['mensagem'] = "Erro ao alterar o atendimento " .$id;
