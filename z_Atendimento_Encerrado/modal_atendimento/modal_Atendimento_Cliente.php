@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <table class="table table-striped text-center">
                     <thead>
-                        <tr class="table-header">
+                        <tr class="table-primary">
                             <th class="align-middle">Código: </th>
                             <th class="align-middle">Nome: </th>
                             <th class="align-middle">CNPJ: </th>

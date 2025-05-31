@@ -26,15 +26,58 @@ if (!isset($_SESSION['LOGADO'])) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        body {
-            padding-top: 70px;
-            background-color: #f8f9fa;
+         body {
+            padding-top: 60px;
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         iframe {
             border: none;
             width: 100%;
-            height: 90vh;
+            height: calc(100vh - 50px);
+        }
+
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand i {
+            font-size: 1.5rem;
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar-text {
+            font-weight: 500;
+        }
+
+        .btn-outline-light {
+            transition: 0.3s;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #ffffff;
+            color: #0d6efd;
+        }
+
+        .dropdown:hover > .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+            border-radius: 0 0 0.5rem 0.5rem;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -52,7 +95,7 @@ if (!isset($_SESSION['LOGADO'])) {
                 <ul class="navbar-nav me-auto">
                     <!-- Dropdown: Cadastros -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Cadastros</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button">Cadastros</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="z_Cliente/cliente.php" target="iframe_a"><i class="fas fa-users"></i> Clientes</a></li>
                             <li><a class="dropdown-item" href="z_Tipo_Atendimento/tipo_atendimento.php" target="iframe_a"><i class="fas fa-folder"></i> Tipo Atendimento</a></li>
@@ -65,7 +108,7 @@ if (!isset($_SESSION['LOGADO'])) {
 
                     <!-- Dropdown: Atendimentos -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Atendimentos</a>
+                        <a class="nav-link dropdown-toggle" href="#" role="button">Atendimentos</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="z_Atendimento/atendimento.php" target="iframe_a"><i class="fas fa-plus-circle"></i> Novo Atendimento</a></li>
                             <li><a class="dropdown-item" href="z_Atendimento_encerrado/atendimento_encerrado.php" target="iframe_a"><i class="bi bi-dash-square-fill"></i> Encerrados</a></li>
@@ -74,7 +117,7 @@ if (!isset($_SESSION['LOGADO'])) {
 
                     <!-- Dropdown: Relatórios -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Relatórios</a>
+                           <a class="nav-link dropdown-toggle" href="#" role="button">Relatórios</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="z_Relatorios/relatorio_cliente.php" target="iframe_a"><i class="fas fa-list"></i> Clientes</a></li>
                             <li><a class="dropdown-item" href="z_Relatorios/relatorio_atendimento.php" target="iframe_a"><i class="fas fa-list"></i> Atendimentos</a></li>

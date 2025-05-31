@@ -11,8 +11,6 @@
 	
 	</head>
 	
-
-
 <style>
 body, html {
   height: 100%;
@@ -20,13 +18,8 @@ body, html {
 }
 
 .bg {
-  /* The image used */
-  background-image: url("img/centro.jpg");
-
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
+  background-image: url("img/centro.png");
+  height: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

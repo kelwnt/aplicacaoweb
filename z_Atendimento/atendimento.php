@@ -88,7 +88,7 @@ session_start();
 										<?php echo $dados['id_cliente']; ?>
 									</td>-->
 									<td class="table-cell align-middle">
-										<?php echo $dados['id_cliente']; ?>
+										<?php echo $dados_cliente['nome']; ?>
 									</td>
 
 									<td class="table-cell align-middle">
