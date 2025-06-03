@@ -58,8 +58,8 @@ session_start();
                             <td>
                                 <?php
                                 echo strtoupper($dados['tipo_acesso']) === 'A'
-                                    ? '<i class="fas fa-user-shield text-primary"></i> Admin'
-                                    : '<i class="fas fa-headset text-info"></i> Atendente';
+                                    ? '<i class="fas fa-user-shield text-primary"></i> '
+                                    : '<i class="fas fa-headset text-info"></i> ';
                                 ?>
                             </td>
                             <td>
@@ -72,7 +72,7 @@ session_start();
                             <td>
                                 <a href="editar_atendente.php?id_atendente=<?php echo $dados['id_atendente']; ?>"
 								    class="btn btn-warning" role="button">
-								    <i class="bi bi-pencil"></i> Editar
+								    <i class="bi bi-pencil"></i> 
 								</a>
                             </td>
 
@@ -81,7 +81,7 @@ session_start();
                                     <form method="POST" action="crud_Atendente/inativar_atendente.php" style="display:inline;">
                                         <input type="hidden" name="id" value="<?= $dados['id_atendente']; ?>">
                                         <button type="submit" name="btn-deletar" class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash"></i> Deletar
+                                            <i class="bi bi-trash"></i> 
                                         </button>
                                     </form>
                                 <?php else: ?>
@@ -101,7 +101,7 @@ session_start();
 
         <div class="text-end mt-3">
             <a href="adicionar_atendente.php" class="btn btn-secondary">
-                <i class="bi bi-plus"></i> Adicionar Atendente
+                </i> Adicionar Atendente
             </a>
         </div>
     </div>

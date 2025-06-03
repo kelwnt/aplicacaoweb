@@ -87,7 +87,7 @@ session_start();
 									<td class="table-cell align-middle">
 										<a href="editar_Tipo_Atendimento.php?id_tipo_atendimento=<?php echo $dados['id_tipo_atendimento']; ?>"
 											class="btn btn-warning" role="button">
-											<i class="bi bi-pencil"></i> Editar
+											<i class="bi bi-pencil"></i> 
 										</a>
 									</td>
 
@@ -95,7 +95,7 @@ session_start();
 										<?php if ($dados['ativo'] == 'A'): ?>
 											<button onclick="setDeleteId(<?php echo $dados['id_tipo_atendimento']; ?>)"
 												class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete">
-												<i class="bi bi-trash"></i> Deletar
+												<i class="bi bi-trash"></i> 
 											</button>
 										<?php elseif ($dados['ativo'] == 'D'): ?>
 											<button onclick="setReativaId(<?php echo $dados['id_tipo_atendimento']; ?>)"
@@ -122,7 +122,7 @@ session_start();
 						</tbody>
 					</table>
 					</div>				
-				<a href="adicionar_tipo_atendimento.php" class="btn btn-secondary mt-3 float-end"> <i class="bi bi-plus"></i>
+				<a href="adicionar_tipo_atendimento.php" class="btn btn-secondary mt-3 float-end"></i>
 				Adicionar Tipo Atendimento</a>
 			</div>				
 		</div>

@@ -97,7 +97,7 @@ session_start();
 										<td class="table-cell align-middle">
 											<a href="editar_cliente.php?id_cliente=<?php echo $dados['id_cliente']; ?>"
 												class="btn btn-warning" role="button">
-												<i class="bi bi-pencil"></i> Editar
+												<i class="bi bi-pencil"></i> 
 											</a>
 										</td>
 											<!-- excluir cliente -->
@@ -106,7 +106,7 @@ session_start();
 										<?php if ($dados['ativo'] == 'A'): ?>
 											<button onclick="setDeleteId(<?php echo $dados['id_cliente']; ?>)"
 												class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal_delete">
-												<i class="bi bi-trash"></i> Deletar
+												<i class="bi bi-trash"></i> 
 											</button>
 										<?php elseif ($dados['ativo'] == 'D'): ?>
 											<button onclick="setReativaId(<?php echo $dados['id_cliente']; ?>)"
@@ -132,7 +132,7 @@ session_start();
 					</table>
 				</div>
 				<!--<a href="adicionar_cliente.php" class="btn">Adicionar cliente</a>-->
-				<a href="adicionar_cliente.php" class="btn btn-secondary mt-3 float-end"> <i class="bi bi-plus"></i>
+				<a href="adicionar_cliente.php" class="btn btn-secondary mt-3 float-end"></i>
 					Adicionar Cliente</a>
 
 

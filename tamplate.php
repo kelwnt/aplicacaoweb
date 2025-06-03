@@ -28,7 +28,7 @@ if (!isset($_SESSION['LOGADO'])) {
     <style>
          body {
             padding-top: 60px;
-            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            background: linear-gradient(to right,rgb(62, 160, 230),rgb(207, 74, 74));
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -61,7 +61,7 @@ if (!isset($_SESSION['LOGADO'])) {
         }
 
         .btn-outline-light:hover {
-            background-color: #ffffff;
+            background-color:rgb(42, 135, 223);
             color: #0d6efd;
         }
 
@@ -77,7 +77,7 @@ if (!isset($_SESSION['LOGADO'])) {
             margin-top: 0;
             border-radius: 0 0 0.5rem 0.5rem;
             border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>

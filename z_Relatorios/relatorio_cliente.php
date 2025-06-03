@@ -47,7 +47,7 @@ include_once '../functions.php';
                             <input type="text" name="term" id="term" class="form-control" 
 							value="" >						
                            
-                            <button type="submit" class="btn btn-secondary">
+                            <button type="submit" class="btn btn-info">
     <i class="bi bi-search"></i> Pesquisar
 </button>
 					    </div>                        
@@ -121,8 +121,9 @@ include_once '../functions.php';
                 </table>
             </div>
             <form method="post" action="export_csv.php">
-                <button type="submit" name="export" value="csv export" class="btn btn-secondary mt-3 float-end"><i
-                        class="bi bi-plus"></i>Gerar CSV</button>
+                <button type="submit" name="export" value="csv export" class="btn btn-secondary mt-3 float-end">
+                <i class="bi bi-download"></i> Gerar CSV
+                        </button>
             </form>
         </div>
     </div>
