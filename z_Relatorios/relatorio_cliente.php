@@ -18,8 +18,9 @@ include_once '../functions.php';
             <div class="input-group mb-3">
                 <span class="input-group-text">Buscar por:</span>
                 <select class="form-select" name="searchBy">
-                    <option value="nome">Nome</option>
-                    <option value="cnpj">CNPJ</option>
+                    <option value="nome">Todos</option>
+                    <option value="cnpj">Nome</option>
+                    <option value="nome">CNPJ</option>
                 </select>
                 <span class="input-group-text">Termo:</span>
                 <input type="text" name="term" class="form-control">

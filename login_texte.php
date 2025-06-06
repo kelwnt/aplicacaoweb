@@ -65,7 +65,7 @@ require_once 'login_validation.php';
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class="col-md-5">
             <div class="card p-4">
-                <h3 class="text-center mb-4"><i class="fas fa-user-shield"></i> Acesso ao Sistema</h3>
+                <h3 class="text-center mb-4"><i class="fas fa-user-shield"></i>Sistema de Atendimentos</h3>
 
                 <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
                     <div class="form-group mb-3">

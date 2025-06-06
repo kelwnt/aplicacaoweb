@@ -1,107 +1,178 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-require_once '../dompdf/autoload.inc.php';
-include_once '../php_action/db_connect.php';
-include_once '../functions.php'; // caso tenha funções úteis
-
-use Dompdf\Dompdf;
-use Dompdf\Options;
-
 session_start();
+include_once '../php_action/db_connect.php';
+include_once '../functions.php';
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-// Pega SQL salvo na sessão, ou default
-$sql = $_SESSION['rel_atendimento'] ?? "SELECT * FROM atendimento ORDER BY id_atendimento DESC";
-$resultado = mysqli_query($connect, $sql);
+</head>
 
-// Configura DomPDF
-$options = new Options();
-$options->set('defaultFont', 'Arial');
-$options->setIsRemoteEnabled(true);
-$dompdf = new Dompdf($options);
+<body>
+	<div class="row mt-4">
+		<div class="col-12 col-md-8 offset-md-2">
+			<div class="p-1 mb-3 bg-dark text-white rounded border border-light">
+				<h3 class="text-center">Relatórios de Atendimentos</h3>
+			</div>
+			<div class="rounded border border-secondary p-3">
+				<table class="table table-striped text-center">
+					<thead>
+						<tr class="table-header">
+							<th class="align-middle">Código: </th>
+							<th class="align-middle">Data Inicio: </th>
+							<th class="align-middle">Data Fim: </th>
+							<!--<th class="align-middle">Tipo Atendimento: </th>-->
+							<!--<th class="align-middle">ID Atendente: </th>-->
+							<!--<th class="align-middle">ID Cliente: </th>-->
+							<th class="align-middle">Nome Cliente: </th>
+							<th class="align-middle">Detalhes: </th>
+						</tr>
+					</thead>
 
-// Monta o HTML do PDF
-$html = '
-<h2 style="text-align: center; color:#003366; border-bottom: 2px solid #003366; padding-bottom: 10px;">Relatório de Atendimentos</h2>
-<table border="1" width="100%" style="border-collapse: collapse; font-size: 12px;">
-    <thead style="background-color: #f0f0f0;">
-        <tr>
-            <th>Código</th>
-            <th>Data Início</th>
-            <th>Data Fim</th>
-            <th>Cliente</th>
-        </tr>
-    </thead>
-    <tbody>';
+					<tbody>
+						<?php
+						$sql = "select * from atendimento";
+						$resultado = mysqli_query($connect, $sql);			
 
-// Loop dos atendimentos
-if ($resultado && mysqli_num_rows($resultado) > 0) {
-    while ($dados = mysqli_fetch_assoc($resultado)) {
-        $id_cliente = $dados['id_cliente'];
-        $id_tipo = $dados['id_tipo_atendimento'];
-        $id_atendente = $dados['id_atendente'];
+						$_SESSION['rel_cliente'] = $sql;
 
-        // Busca dados relacionados (cliente, tipo, atendente)
-        $cliente_query = mysqli_query($connect, "SELECT nome FROM cliente WHERE id_cliente = '$id_cliente'");
-        $tipo_query = mysqli_query($connect, "SELECT tipo_atendimento FROM tipo_atendimento WHERE id_tipo_atendimento = '$id_tipo'");
-        $atendente_query = mysqli_query($connect, "SELECT nome FROM atendente WHERE id_atendente = '$id_atendente'");
+						if (mysqli_num_rows($resultado) > 0):
+							while ($dados = mysqli_fetch_array($resultado)):
+								//include_once 'selects_Atendimento_Gerais.php';
 
-        $nome_cliente = mysqli_fetch_assoc($cliente_query)['nome'] ?? 'N/D';
-        $nome_tipo = mysqli_fetch_assoc($tipo_query)['tipo_atendimento'] ?? 'N/D';
-        $nome_atendente = mysqli_fetch_assoc($atendente_query)['nome'] ?? 'N/D';
+                    
+			
+            $id_tipo_atendimento = $dados['id_tipo_atendimento'];
+			
+			$sql_tipo_atendimento = "select * from tipo_atendimento where id_tipo_atendimento = '$id_tipo_atendimento'" ;
+			$resultado_tipo_atendimento = mysqli_query($connect, $sql_tipo_atendimento);
+			$dados_tipo_atendimento = mysqli_fetch_array($resultado_tipo_atendimento);
+			
+			$id_atendente = $_SESSION['id_atendente'];
+			
+			$sql_atendente = "select * from atendente where id_atendente = '$id_atendente'" ;
+			$resultado_atendente = mysqli_query($connect, $sql_atendente);
+			$dados_atendente = mysqli_fetch_array($resultado_atendente);
+			
+			$id_cliente = $dados['id_cliente'];
+			
+			$sql_cliente = "select * from cliente where id_cliente = '$id_cliente'" ;
+			$resultado_cliente = mysqli_query($connect, $sql_cliente);
+			$dados_cliente = mysqli_fetch_array($resultado_cliente);
+								?>
 
-        $status_texto = match ($dados['ativo']) {
-            'A' => 'Ativo',
-            'C' => 'Concluído',
-            'D' => 'Deletado',
-            default => 'Desconhecido'
-        };
+								<tr>
+									<td class="table-cell align-middle">
+										<?php echo $dados['id_atendimento']; ?>
+									</td>
+									<td class="table-cell align-middle">
+										<?php echo date('d/m/Y', strtotime($dados['dt_inicio'])); ?>
+									</td>
+									<td class="table-cell align-middle">
+										<?php echo date('d/m/Y', strtotime($dados['dt_fim'])); ?>
+									</td>
+									<!--<td class="table-cell align-middle">
+										<?php echo $dados['id_atendente']; ?>
+									</td>-->
+									<!--<td class="table-cell align-middle">
+										<?php echo $dados['id_cliente']; ?>
+									</td>-->
+									<td class="table-cell align-middle">
+										<?php echo $dados_cliente['nome']; ?>
+									</td>
 
-        $html .= '
-        <tr>
-            <td style="text-align:center;">' . $dados['id_atendimento'] . '</td>
-            <td style="text-align:center;">' . date('d/m/Y', strtotime($dados['dt_inicio'])) . '</td>
-            <td style="text-align:center;">' . date('d/m/Y', strtotime($dados['dt_fim'])) . '</td>
-            <td>' . htmlspecialchars($nome_cliente) . '</td>
-        </tr>
-        <tr>
-            <td colspan="4" style="padding: 0;">
-                <table class="subtable" border="1" width="100%" style="border-collapse: collapse; font-size: 11px;">
-                    <thead style="background-color: #f9f9f9;">
-                        <tr>
-                            <th>Tipo Atendimento</th>
-                            <th>Atendente</th>
-                            <th>Descrição</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>' . htmlspecialchars($nome_tipo) . '</td>
-                            <td>' . htmlspecialchars($nome_atendente) . '</td>
-                            <td>' . htmlspecialchars($dados['descricao']) . '</td>
-                            <td style="text-align:center;">' . $status_texto . '</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>';
-    }
-} else {
-    $html .= '<tr><td colspan="4" style="text-align:center;">Nenhum atendimento encontrado.</td></tr>';
-}
+									<td class="table-cell align-middle">
+										<button class="btn btn-success" data-bs-toggle="collapse"
+											data-bs-target="#details-<?php echo $dados['id_atendimento']; ?>">
+											<i class="bi bi-chevron-down"></i>
+										</button>
+									</td>
 
-$html .= '
-    </tbody>
-</table>
-<p style="text-align:center; font-size:10px; color:#666; margin-top: 20px;">
-    Relatório gerado em ' . date('d/m/Y \à\s H:i') . '
-</p>';
+								<tr id="details-<?php echo $dados['id_atendimento']; ?>" class="collapse">
+									<td colspan="11">
+										<div class="table-responsive">
+											<table class="table text-center">
+												<thead>
+													<tr class="table-header">
+														<th class="align-middle">Tipo Atendimento</th>
+														<th class="align-middle">Nome Atendente</th>
+														<th class="align-middle">Descrição</th>
+														<th class="align-middle">Ativo</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td class="table-cell align-middle">
+															<?php echo $dados_tipo_atendimento['tipo_atendimento']; ?>
+														</td>
+														<td class="table-cell align-middle">
+															<?php echo $dados_atendente['nome']; ?>
+														</td>
+														<td class="table-cell align-middle">
+															<?php echo $dados['descricao']; ?>
+														</td>
+														<td class="table-cell align-middle">
+															<?php
+															$status = $dados['ativo'];
+															if ($status == 'A') {
+																echo '<i class="bi bi-check-circle-fill text-success"></i>'; // Ícone de ativo
+															} elseif ($status == 'D') {
+																echo '<i class="bi bi-x-circle-fill text-danger"></i>'; // Ícone de deletado
+															} elseif ($status == 'C') {
+																echo '<i class="bi bi-check-circle-fill text-info"></i>'; // Ícone de concluído
+															} else {
+																// Se o status não corresponder a nenhum dos valores esperados, exiba apenas o valor do status
+																echo $status;
+															}
+															?>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
 
-// Renderiza PDF
-$dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream("relatorio_atendimentos.pdf", ["Attachment" => false]);
-exit;
+
+
+								</tr>
+
+							<?php endwhile;
+						else:
+							?>
+							<tr>
+								<td colspan="8" class="text-center">Nenhum Atendimento encontrado.</td>
+							</tr>
+							<?php
+						endif;
+						?>
+					</tbody>
+				</table>
+
+           
+			</div>
+            <form method="post" action="export_csv.php">
+                <button type="submit" name="export" value="csv export" class="btn btn-danger mt-3 float-end"><i
+                        class="bi bi-plus"></i>Gerar PDF</button>
+            </form>
+		</div>
+	</div>
+
+
+	<?php
+	// carregamos alguma mensagem em tela.
+
+	?>
+
+	<!-- JavaScript do Bootstrap 5 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-..." crossorigin="anonymous"></script>
+
+</body>
+
+</html>
