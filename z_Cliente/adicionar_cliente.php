@@ -73,9 +73,12 @@ endif;
 							placeholder="Ex.: (00) 0000-0000" required>
 					</div>
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Ativo</span>
-						<input type="text" name="tipo_acesso" id="tipo_acesso" class="form-control" maxlength="1"
-							required>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Acesso</span>
+						<select class="form-select" id="ativo" name="ativo" required>
+							<option value="" selected disabled>Selecione Ativo/Inativo</option>
+							<option value="A">Ativo</option>
+							<option value="D">Inativo</option>
+						</select>
 					</div>
 				</div>
 

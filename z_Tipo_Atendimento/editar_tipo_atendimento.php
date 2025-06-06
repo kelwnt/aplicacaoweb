@@ -57,7 +57,7 @@ endif;
 							value="<?php echo $dados['ativo']; ?>" maxlength="1" required>
 					</div>-->
 					<div class="input-group input-group mb-3">
-						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Ativo</span>
+						<span class="input-group-text" id="inputGroup-sizing-sm" style="min-width: 10%;">Acesso</span>
 						<select class="form-select" id="ativo" name="ativo" required>
 							<option value="" disabled>Selecione o tipo de acesso</option>
 							<option value="A" <?php echo ($dados['ativo'] == 'A') ? 'selected' : ''; ?>>
