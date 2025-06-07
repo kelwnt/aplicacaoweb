@@ -11,6 +11,8 @@ use Dompdf\Options;
 
 session_start();
 
+date_default_timezone_set('America/Sao_Paulo');
+
 $sql = $_SESSION['rel_cliente'] ?? "SELECT * FROM cliente";
 $resultado = mysqli_query($connect, $sql);
 
@@ -21,10 +23,21 @@ $options->setIsRemoteEnabled(true);
 $dompdf = new Dompdf($options);
 
 // Gera HTML
-$html = '<h2 style="text-align: center;">Relatório de Clientes</h2>
-<table border="1" width="100%" style="border-collapse: collapse; font-size: 12px;">
-    <thead>
-        <tr style="background-color: #f2f2f2;">
+$html = '  
+    <html><head><style>
+    body { font-family: DejaVu Sans, sans-serif; font-size: 12px; }
+    h2 { text-align: center; color: #333; }
+    .logo { text-align: center; margin-bottom: 20px; }
+    .logo img { height: 60px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    tfoot td { border: none; text-align: right; font-size: 10px; color: #777; }
+</style></head><body>';
+
+$html .= '<div class="logo"><img src="../img/logo.png" alt="Logo da Empresa"></div>';
+$html .= '<h2>Relatório de Clientes</h2>';
+$html .= '<table><thead>
             <th>ID</th><th>Nome</th><th>CNPJ</th><th>Telefone</th><th>Ativo</th>
         </tr>
     </thead>
@@ -45,10 +58,12 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
 }
 
 $html .= '</tbody></table>';
+$html .= '<footer><p style="text-align:right; font-size:10px; margin-top:20px;">Gerado em: ' . date('d/m/Y H:i') . '</p></footer>';
+$html .= '</body></html>';
 
 // Gera o PDF
 $dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
+$dompdf->setPaper('A4', 'landscape');
 $dompdf->render();
 $dompdf->stream("relatorio_clientes.pdf", ["Attachment" => false]);
 exit;

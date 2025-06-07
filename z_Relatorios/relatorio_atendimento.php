@@ -2,177 +2,192 @@
 session_start();
 include_once '../php_action/db_connect.php';
 include_once '../functions.php';
+
+// FILTROS
+$filtro_cliente = $_GET['cliente'] ?? '';
+$filtro_status = $_GET['status'] ?? '';
+$filtro_tipo = $_GET['tipo'] ?? '';
+$data_inicio = $_GET['data_inicio'] ?? '';
+$data_fim = $_GET['data_fim'] ?? '';
+
+// PREPARAÇÃO DE COMBOS
+$clientes_result = mysqli_query($connect, "SELECT id_cliente, nome FROM cliente ORDER BY nome ASC");
+$tipos_result = mysqli_query($connect, "SELECT id_tipo_atendimento, tipo_atendimento FROM tipo_atendimento ORDER BY tipo_atendimento ASC");
+
+// CONSULTA BASE
+$sql = "SELECT * FROM atendimento WHERE 1=1";
+
+// APLICA FILTROS
+if (!empty($filtro_cliente)) {
+    $id_cliente = mysqli_real_escape_string($connect, $filtro_cliente);
+    $sql .= " AND id_cliente = '$id_cliente'";
+}
+if (!empty($filtro_status)) {
+    $status = mysqli_real_escape_string($connect, $filtro_status);
+    $sql .= " AND ativo = '$status'";
+}
+if (!empty($filtro_tipo)) {
+    $tipo = mysqli_real_escape_string($connect, $filtro_tipo);
+    $sql .= " AND id_tipo_atendimento = '$tipo'";
+}
+if (!empty($data_inicio)) {
+    $data = mysqli_real_escape_string($connect, $data_inicio);
+    $sql .= " AND dt_inicio >= '$data'";
+}
+if (!empty($data_fim)) {
+    $data = mysqli_real_escape_string($connect, $data_fim);
+    $sql .= " AND dt_inicio <= '$data'";
+}
+
+$resultado = mysqli_query($connect, $sql);
+$_SESSION['rel_cliente'] = $sql;
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Relatório de </title>
+    <title>Relatório de Atendimentos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
 </head>
 
 <body>
-	<div class="row mt-4">
-		<div class="col-12 col-md-8 offset-md-2">
-			<div class="p-1 mb-3 bg-dark text-white rounded border border-light">
-				<h3 class="text-center">Relatórios de Atendimentos</h3>
-			</div>
-			<div class="rounded border border-secondary p-3">
-				<table class="table table-striped text-center">
-					<thead>
-						<tr class="table-header">
-							<th class="align-middle">Código: </th>
-							<th class="align-middle">Data Inicio: </th>
-							<th class="align-middle">Data Fim: </th>
-							<!--<th class="align-middle">Tipo Atendimento: </th>-->
-							<!--<th class="align-middle">ID Atendente: </th>-->
-							<!--<th class="align-middle">ID Cliente: </th>-->
-							<th class="align-middle">Nome Cliente: </th>
-							<th class="align-middle">Detalhes: </th>
-						</tr>
-					</thead>
+<div class="row mt-4">
+    <div class="col-12 col-md-10 offset-md-1">
+        <div class="p-2 mb-3 bg-dark text-white rounded border border-light">
+            <h3 class="text-center">Relatórios de Atendimentos</h3>
+        </div>
 
-					<tbody>
-						<?php
-						$sql = "select * from atendimento";
-						$resultado = mysqli_query($connect, $sql);			
+        <!-- FORMULÁRIO DE FILTRO -->
+        <form method="GET" class="mb-3 row g-2">
+            <div class="col-md-3">
+                <label class="form-label">Cliente:</label>
+                <select name="cliente" class="form-select">
+                    <option value="">Todos</option>
+                    <?php while ($c = mysqli_fetch_assoc($clientes_result)): ?>
+                        <option value="<?= $c['id_cliente'] ?>" <?= ($filtro_cliente == $c['id_cliente']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($c['nome']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
 
-						$_SESSION['rel_cliente'] = $sql;
+            <div class="col-md-2">
+                <label class="form-label">Status:</label>
+                <select name="status" class="form-select">
+                    <option value="">Todos</option>
+                    <option value="A" <?= ($filtro_status == 'A') ? 'selected' : '' ?>>Ativo</option>
+                    <option value="C" <?= ($filtro_status == 'C') ? 'selected' : '' ?>>Concluído</option>
+                    <option value="D" <?= ($filtro_status == 'D') ? 'selected' : '' ?>>Deletado</option>
+                </select>
+            </div>
 
-						if (mysqli_num_rows($resultado) > 0):
-							while ($dados = mysqli_fetch_array($resultado)):
-								//include_once 'selects_Atendimento_Gerais.php';
+            <div class="col-md-3">
+                <label class="form-label">Tipo Atendimento:</label>
+                <select name="tipo" class="form-select">
+                    <option value="">Todos</option>
+                    <?php while ($t = mysqli_fetch_assoc($tipos_result)): ?>
+                        <option value="<?= $t['id_tipo_atendimento'] ?>" <?= ($filtro_tipo == $t['id_tipo_atendimento']) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($t['tipo_atendimento']) ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
 
-                    
-			
-            $id_tipo_atendimento = $dados['id_tipo_atendimento'];
-			
-			$sql_tipo_atendimento = "select * from tipo_atendimento where id_tipo_atendimento = '$id_tipo_atendimento'" ;
-			$resultado_tipo_atendimento = mysqli_query($connect, $sql_tipo_atendimento);
-			$dados_tipo_atendimento = mysqli_fetch_array($resultado_tipo_atendimento);
-			
-			$id_atendente = $_SESSION['id_atendente'];
-			
-			$sql_atendente = "select * from atendente where id_atendente = '$id_atendente'" ;
-			$resultado_atendente = mysqli_query($connect, $sql_atendente);
-			$dados_atendente = mysqli_fetch_array($resultado_atendente);
-			
-			$id_cliente = $dados['id_cliente'];
-			
-			$sql_cliente = "select * from cliente where id_cliente = '$id_cliente'" ;
-			$resultado_cliente = mysqli_query($connect, $sql_cliente);
-			$dados_cliente = mysqli_fetch_array($resultado_cliente);
-								?>
+            <div class="col-md-2">
+                <label class="form-label">Data Início:</label>
+                <input type="date" name="data_inicio" value="<?= htmlspecialchars($data_inicio) ?>" class="form-control">
+            </div>
 
-								<tr>
-									<td class="table-cell align-middle">
-										<?php echo $dados['id_atendimento']; ?>
-									</td>
-									<td class="table-cell align-middle">
-										<?php echo date('d/m/Y', strtotime($dados['dt_inicio'])); ?>
-									</td>
-									<td class="table-cell align-middle">
-										<?php echo date('d/m/Y', strtotime($dados['dt_fim'])); ?>
-									</td>
-									<!--<td class="table-cell align-middle">
-										<?php echo $dados['id_atendente']; ?>
-									</td>-->
-									<!--<td class="table-cell align-middle">
-										<?php echo $dados['id_cliente']; ?>
-									</td>-->
-									<td class="table-cell align-middle">
-										<?php echo $dados_cliente['nome']; ?>
-									</td>
+            <div class="col-md-2">
+                <label class="form-label">Data Fim:</label>
+                <input type="date" name="data_fim" value="<?= htmlspecialchars($data_fim) ?>" class="form-control">
+            </div>
 
-									<td class="table-cell align-middle">
-										<button class="btn btn-success" data-bs-toggle="collapse"
-											data-bs-target="#details-<?php echo $dados['id_atendimento']; ?>">
-											<i class="bi bi-chevron-down"></i>
-										</button>
-									</td>
+            <div class="col-md-12 mt-2 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-funnel-fill"></i> Filtrar
+                </button>
+            </div>
+        </form>
 
-								<tr id="details-<?php echo $dados['id_atendimento']; ?>" class="collapse">
-									<td colspan="11">
-										<div class="table-responsive">
-											<table class="table text-center">
-												<thead>
-													<tr class="table-header">
-														<th class="align-middle">Tipo Atendimento</th>
-														<th class="align-middle">Nome Atendente</th>
-														<th class="align-middle">Descrição</th>
-														<th class="align-middle">Ativo</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td class="table-cell align-middle">
-															<?php echo $dados_tipo_atendimento['tipo_atendimento']; ?>
-														</td>
-														<td class="table-cell align-middle">
-															<?php echo $dados_atendente['nome']; ?>
-														</td>
-														<td class="table-cell align-middle">
-															<?php echo $dados['descricao']; ?>
-														</td>
-														<td class="table-cell align-middle">
-															<?php
-															$status = $dados['ativo'];
-															if ($status == 'A') {
-																echo '<i class="bi bi-check-circle-fill text-success"></i>'; // Ícone de ativo
-															} elseif ($status == 'D') {
-																echo '<i class="bi bi-x-circle-fill text-danger"></i>'; // Ícone de deletado
-															} elseif ($status == 'C') {
-																echo '<i class="bi bi-check-circle-fill text-info"></i>'; // Ícone de concluído
-															} else {
-																// Se o status não corresponder a nenhum dos valores esperados, exiba apenas o valor do status
-																echo $status;
-															}
-															?>
-														</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</td>
-								</tr>
+        <div class="rounded border border-secondary p-3">
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr class="table-header">
+                        <th>Código</th>
+                        <th>Data Início</th>
+                        <th>Data Fim</th>
+                        <th>Cliente</th>
+                        <th>Detalhes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php if (mysqli_num_rows($resultado) > 0): ?>
+                    <?php while ($dados = mysqli_fetch_assoc($resultado)):
+                        $tipo = mysqli_fetch_assoc(mysqli_query($connect, "SELECT tipo_atendimento FROM tipo_atendimento WHERE id_tipo_atendimento = '{$dados['id_tipo_atendimento']}'"));
+                        $cliente = mysqli_fetch_assoc(mysqli_query($connect, "SELECT nome FROM cliente WHERE id_cliente = '{$dados['id_cliente']}'"));
+                        $atendente = mysqli_fetch_assoc(mysqli_query($connect, "SELECT nome FROM atendente WHERE id_atendente = '{$dados['id_atendente']}'"));
+                    ?>
+                        <tr>
+                            <td><?= $dados['id_atendimento'] ?></td>
+                            <td><?= date('d/m/Y', strtotime($dados['dt_inicio'])) ?></td>
+                            <td><?= date('d/m/Y', strtotime($dados['dt_fim'])) ?></td>
+                            <td><?= htmlspecialchars($cliente['nome']) ?></td>
+                            <td>
+                                <button class="btn btn-success" data-bs-toggle="collapse" data-bs-target="#details-<?= $dados['id_atendimento'] ?>">
+                                    <i class="bi bi-chevron-down"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr id="details-<?= $dados['id_atendimento'] ?>" class="collapse">
+                            <td colspan="5">
+                                <table class="table table-bordered text-center">
+                                    <thead class="table-secondary">
+                                        <tr>
+                                            <th>Tipo Atendimento</th>
+                                            <th>Atendente</th>
+                                            <th>Descrição</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><?= htmlspecialchars($tipo['tipo_atendimento']) ?></td>
+                                            <td><?= htmlspecialchars($atendente['nome']) ?></td>
+                                            <td><?= htmlspecialchars($dados['descricao']) ?></td>
+                                            <td>
+                                                <?php
+                                                echo match ($dados['ativo']) {
+                                                    'A' => '<i class="bi bi-check-circle-fill text-success"></i>',
+                                                    'C' => '<i class="bi bi-check-circle-fill text-info"></i>',
+                                                    'D' => '<i class="bi bi-x-circle-fill text-danger"></i>',
+                                                    default => 'Desconhecido'
+                                                };
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <tr><td colspan="5">Nenhum atendimento encontrado.</td></tr>
+                <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
+        <form method="post" action="export_pdf.php" target="_blank">
+            <button type="submit" name="export" value="pdf export" class="btn btn-danger mt-3 float-end">
+                <i class="bi bi-file-earmark-pdf"></i> Gerar PDF
+            </button>
+        </form>
+    </div>
+</div>
 
-
-								</tr>
-
-							<?php endwhile;
-						else:
-							?>
-							<tr>
-								<td colspan="8" class="text-center">Nenhum Atendimento encontrado.</td>
-							</tr>
-							<?php
-						endif;
-						?>
-					</tbody>
-				</table>
-
-           
-			</div>
-            <form method="post" action="export_csv.php">
-                <button type="submit" name="export" value="csv export" class="btn btn-danger mt-3 float-end"><i
-                        class="bi bi-plus"></i>Gerar PDF</button>
-            </form>
-		</div>
-	</div>
-
-
-	<?php
-	// carregamos alguma mensagem em tela.
-
-	?>
-
-	<!-- JavaScript do Bootstrap 5 -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-..." crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
