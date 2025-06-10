@@ -26,7 +26,7 @@ $html = '
     tfoot td { border: none; text-align: right; font-size: 10px; color: #777; }
 </style></head><body>';
 
-$html .= '<div class="logo"><img src="../img/logo.png" alt="Logo da Empresa"></div>';
+
 $html .= '<h2>Relatório de Atendimentos</h2>';
 $html .= '<table><thead>
 <tr>
