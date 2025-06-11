@@ -7,12 +7,14 @@ include_once '../functions.php';
 $filtro_cliente = $_GET['cliente'] ?? '';
 $filtro_status = $_GET['status'] ?? '';
 $filtro_tipo = $_GET['tipo'] ?? '';
+$filtro_atendente = $_GET['atendente'] ?? '';
 $data_inicio = $_GET['data_inicio'] ?? '';
 $data_fim = $_GET['data_fim'] ?? '';
 
 // PREPARAÇÃO DE COMBOS
 $clientes_result = mysqli_query($connect, "SELECT id_cliente, nome FROM cliente ORDER BY nome ASC");
 $tipos_result = mysqli_query($connect, "SELECT id_tipo_atendimento, tipo_atendimento FROM tipo_atendimento ORDER BY tipo_atendimento ASC");
+$atendentes_result = mysqli_query($connect, "SELECT id_atendente, nome FROM atendente ORDER BY nome ASC");
 
 // CONSULTA BASE
 $sql = "SELECT * FROM atendimento WHERE 1=1";
@@ -29,6 +31,10 @@ if (!empty($filtro_status)) {
 if (!empty($filtro_tipo)) {
     $tipo = mysqli_real_escape_string($connect, $filtro_tipo);
     $sql .= " AND id_tipo_atendimento = '$tipo'";
+}
+if (!empty($filtro_atendente)) {
+    $atendente = mysqli_real_escape_string($connect, $filtro_atendente);
+    $sql .= " AND id_atendente = '$atendente'";
 }
 if (!empty($data_inicio)) {
     $data = mysqli_real_escape_string($connect, $data_inicio);
@@ -94,7 +100,20 @@ $_SESSION['rel_cliente'] = $sql;
                     <?php endwhile; ?>
                 </select>
             </div>
-
+            
+        
+            <div class="col-md-3">
+                  <label class="form-label">Atendente:</label>
+                 <select name="atendente" class="form-select">
+                    <option value="">Todos</option>
+                    <?php while ($a = mysqli_fetch_assoc($atendentes_result)): ?>
+            <option value="<?= $a['id_atendente'] ?>" <?= ($filtro_atendente == $a['id_atendente']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($a['nome']) ?>
+            </option>
+        <?php endwhile; ?>
+    </select>
+</div>
+            
             <div class="col-md-2">
                 <label class="form-label">Data Início:</label>
                 <input type="date" name="data_inicio" value="<?= htmlspecialchars($data_inicio) ?>" class="form-control">
@@ -105,11 +124,15 @@ $_SESSION['rel_cliente'] = $sql;
                 <input type="date" name="data_fim" value="<?= htmlspecialchars($data_fim) ?>" class="form-control">
             </div>
 
-            <div class="col-md-12 mt-2 d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-funnel-fill"></i> Filtrar
-                </button>
-            </div>
+            <div class="col-md-12 mt-2 d-flex justify-content-end gap-2">
+    <a href="<?= basename($_SERVER['PHP_SELF']) ?>" class="btn btn-secondary">
+        <i class="bi bi-x-circle"></i> Limpar
+    </a>
+    <button type="submit" class="btn btn-primary">
+        <i class="bi bi-funnel-fill"></i> Filtrar
+    </button>
+</div>
+
         </form>
 
         <div class="rounded border border-secondary p-3">

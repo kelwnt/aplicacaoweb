@@ -15,20 +15,29 @@ include_once '../functions.php';
     <div class="container mt-4">
         <h3 class="text-center">Relatório de Clientes</h3>
         <form method="GET" action="">
-            <div class="input-group mb-3">
-                <span class="input-group-text">Buscar por:</span>
-                <select class="form-select" name="searchBy">
-                    <option value="nome">Todos</option>
-                    <option value="cnpj">Nome</option>
-                    <option value="nome">CNPJ</option>
-                </select>
-                <span class="input-group-text">Termo:</span>
-                <input type="text" name="term" class="form-control">
-                <button type="submit" class="btn btn-info">
-                    <i class="bi bi-search"></i> Pesquisar
-                </button>
-            </div>
-        </form>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Buscar por:</span>
+        <select class="form-select" name="searchBy">
+            <option value="nome">Todos</option>
+            <option value="cnpj">Nome</option>
+            <option value="nome">CNPJ</option>
+        </select>
+        <span class="input-group-text">Termo:</span>
+        <input type="text" name="term" class="form-control">
+        
+        <span class="input-group-text">Status:</span>
+        <select class="form-select" name="status">
+            <option value="">Todos</option>
+            <option value="1" <?= (isset($_GET['status']) && $_GET['status'] === 'A') ? 'selected' : '' ?>>Ativo</option>
+            <option value="0" <?= (isset($_GET['status']) && $_GET['status'] === 'I') ? 'selected' : '' ?>>Inativo</option>
+        </select>
+
+        <button type="submit" class="btn btn-info">
+            <i class="bi bi-search"></i> Pesquisar
+        </button>
+    </div>
+</form>
+
 
         <table class="table table-striped text-center mt-3">
             <thead class="table-dark">
@@ -41,12 +50,25 @@ include_once '../functions.php';
                 $sql = "SELECT * FROM cliente";
                 $_SESSION['rel_cliente'] = $sql;
 
-                if (!empty($_GET['searchBy']) && !empty($_GET['term'])) {
-                    $searchBy = $_GET['searchBy'];
-                    $term = $searchBy === 'cnpj' ? preg_replace("/[^0-9]/", "", $_GET['term']) : addslashes($_GET['term']);
-                    $sql .= " WHERE $searchBy LIKE '%$term%'";
-                    $_SESSION['rel_cliente'] = $sql;
-                }
+               $condicoes = [];
+
+if (!empty($_GET['searchBy']) && !empty($_GET['term'])) {
+    $searchBy = $_GET['searchBy'];
+    $term = $searchBy === 'cnpj' ? preg_replace("/[^0-9]/", "", $_GET['term']) : addslashes($_GET['term']);
+    $condicoes[] = "$searchBy LIKE '%$term%'";
+}
+
+if (isset($_GET['status']) && $_GET['status'] !== '') {
+    $status = ($_GET['status'] === 'A') ? A : I;
+    $condicoes[] = "ativo = $status";
+}
+
+if (!empty($condicoes)) {
+    $sql .= ' WHERE ' . implode(' AND ', $condicoes);
+}
+
+$_SESSION['rel_cliente'] = $sql;
+
 
                 $resultado = mysqli_query($connect, $sql);
 
