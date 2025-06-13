@@ -21,3 +21,9 @@ function telephone($number) {
     return "Telefone Inválido";
 }
 ?>
+<script>
+    function myFunction(p1, p2) {
+        document.getElementById("id_cliente").value = p2;
+        document.getElementById("nome_cliente").value = p1;
+    }
+</script>
